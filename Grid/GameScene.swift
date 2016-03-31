@@ -14,15 +14,13 @@ class GameScene: SKScene {
     var height: CGFloat = 24
     var boxSize: CGFloat!
     var gridStart: CGPoint!
+    var gridPoint: int2?
     
     
     override func didMoveToView(view: SKView) {
         createGrid()
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-
-    }
    
     override func update(currentTime: CFTimeInterval) {
     }
@@ -53,6 +51,50 @@ class GameScene: SKScene {
         gridStart = CGPointMake(offsetX, offsetY) // set gridStart for later use
         grid.position = CGPointMake(offsetX, offsetY) // set the grid position, centered in view
         addChild(grid) // add the grid to the scene
+    }
+
+    
+    
+    func convertToGrid(location: CGPoint)-> int2{ //Converts a CGPoint to a int2 (Grid position)
+        return int2(Int32((location.x - gridStart.x) / boxSize), Int32((location.y - gridStart.y) / boxSize))
+    }
+    
+    
+    
+    func playerHasInteracted(location: CGPoint){ //The function to do stuff with a player touch
+        gridPoint = convertToGrid(location)
+        print("\(gridPoint)")
+    }
+    
+    
+    
+    
+    func playerTapp(location: CGPoint){  //Detects a tap, only give cordinates once
+        playerHasInteracted(location)
+    }
+    
+    func playerSwipe(location: CGPoint){ //Detects a moving touch, constantly runs with the cordinates
+        playerHasInteracted(location)
+    }
+    
+    
+    
+    
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        guard let touch = touches.first else { //Gets the location of a touch as a UITouch
+            return
+        }
+        let touchLocation = touch.locationInNode(self)//Converts UITouch into a CGPoint
+        playerTapp(touchLocation)
+    }
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        guard let touch = touches.first else { //Gets the location of a swipe as a UITouch
+            return
+        }
+        let touchLocation = touch.locationInNode(self)//Converts UITouch into a CGPoint
+        playerSwipe(touchLocation)
     }
 
 }
