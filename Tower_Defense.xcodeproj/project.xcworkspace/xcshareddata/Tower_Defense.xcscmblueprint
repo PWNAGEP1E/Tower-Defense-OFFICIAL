@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "AF3591F4B7C6E0821C18197D795A67735E4E2DEA",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "AF3591F4B7C6E0821C18197D795A67735E4E2DEA" : 0,
+    "0C4C57D6395F85C10DA0A2235C0BDE5EB3E8A833" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "ACE5D3B9-2480-4443-B9FB-35F1227CA808",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "AF3591F4B7C6E0821C18197D795A67735E4E2DEA" : "Tower-Defense-OFFICIAL\/",
+    "0C4C57D6395F85C10DA0A2235C0BDE5EB3E8A833" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Tower_Defense",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Tower_Defense.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/PWNAGEP1E\/Tower-Defense-OFFICIAL.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0C4C57D6395F85C10DA0A2235C0BDE5EB3E8A833"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/PWNAGEP1E\/Tower-Defense-OFFICIAL",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AF3591F4B7C6E0821C18197D795A67735E4E2DEA"
+    }
+  ]
+}

@@ -7,18 +7,26 @@
 //
 
 import SpriteKit
+import GameplayKit
 
 class GameScene: SKScene {
+    
+    
     
     var width: CGFloat!
     var height: CGFloat = 24
     var boxSize: CGFloat!
     var gridStart: CGPoint!
     var gridPoint: int2?
+    var graph: GKGridGraph!
     
     
     override func didMoveToView(view: SKView) {
         createGrid()
+        
+        
+        
+        graph = GKGridGraph (fromGridStartingAt: int2(0, 0), width:Int32(width), height: Int32(height), diagonalsAllowed: false)
     }
     
    
@@ -55,38 +63,45 @@ class GameScene: SKScene {
 
     
     
+    
+    
+    func convertToPoint(coordinate: int2) -> CGPoint{ //Converts the grid cordinate to a CGPoint
+        return CGPointMake(CGFloat(coordinate.x) * boxSize + gridStart.x + boxSize / 2, CGFloat(coordinate.y) * boxSize + gridStart.y + boxSize / 2)
+    }
+    
     func convertToGrid(location: CGPoint)-> int2{ //Converts a CGPoint to a int2 (Grid position)
         return int2(Int32((location.x - gridStart.x) / boxSize), Int32((location.y - gridStart.y) / boxSize))
     }
     
     
     
+    func placeTowerAtCordinate(coordinate: int2){ //Places a tower at the grid cordinate
+        if let node = graph.nodeAtGridPosition(coordinate) {
+            //let tower = GKEntity()
+            
+            let square = SKSpriteNode(imageNamed: "Danish-Highlighted")
+            square.size = CGSize(width: boxSize, height: boxSize)
+            square.position = convertToPoint(coordinate)
+            addChild(square)
+            graph.removeNodes([node])
+        }
+    }
+    
+    
+    
+    
+    
     func playerHasInteracted(location: CGPoint){ //The function to do stuff with a player touch
-        gridPoint = convertToGrid(location)
-        print("\(gridPoint)")
+        let gridPoint = convertToGrid(location)
+        placeTowerAtCordinate(gridPoint)
     }
-    
-    
-    
-    
-    func playerTapp(location: CGPoint){  //Detects a tap, only give cordinates once
-        playerHasInteracted(location)
-    }
-    
-    func playerSwipe(location: CGPoint){ //Detects a moving touch, constantly runs with the cordinates
-        playerHasInteracted(location)
-    }
-    
-    
-    
-    
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         guard let touch = touches.first else { //Gets the location of a touch as a UITouch
             return
         }
         let touchLocation = touch.locationInNode(self)//Converts UITouch into a CGPoint
-        playerTapp(touchLocation)
+        playerHasInteracted(touchLocation)
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -94,7 +109,7 @@ class GameScene: SKScene {
             return
         }
         let touchLocation = touch.locationInNode(self)//Converts UITouch into a CGPoint
-        playerSwipe(touchLocation)
+        playerHasInteracted(touchLocation)
     }
 
 }
